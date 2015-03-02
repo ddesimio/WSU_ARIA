@@ -19,5 +19,10 @@
     <string name="Submit">Submit</string>
     <string name="Room">Room #</string>
     <string name="Building1" />
+    <string name="Building2">Building2</string>
+    <string name="Building3">Building3</string>
+    <string name="Building4">Building4</string>
+    <string name="Building5">Building5</string>
+    <string name="Building6">Building6</string>
 
 </resources>

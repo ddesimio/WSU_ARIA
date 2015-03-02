@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class scheduleActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
 
-    private Spinner spinner1;
+    private Spinner spinner1, spinner2, spinner3, spinner4, spinner5, spinner6;
     private Button btnSubmit;
 
     //building list
@@ -59,7 +59,15 @@ public class scheduleActivity extends Activity implements AdapterView.OnItemSele
 
     private void addListenerOnButton() {
         spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        spinner3 = (Spinner) findViewById(R.id.spinner3);
+        spinner4 = (Spinner) findViewById(R.id.spinner4);
+        spinner5 = (Spinner) findViewById(R.id.spinner5);
+        spinner6 = (Spinner) findViewById(R.id.spinner6);
+
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
+
+        // FROM HERE DOWN STILL NEED TO INCLUDE THE OTHER FIVE SPINNERS
 
         btnSubmit.setOnClickListener(new OnClickListener() {
 

@@ -44,9 +44,6 @@
         android:id="@+id/roomNum"
         android:layout_gravity="right|top"
         android:textColor="#ff000000"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginRight="60dp"
         android:layout_marginTop="30dp"/>
 
@@ -65,8 +62,125 @@
         android:layout_height="wrap_content"
         android:entries="@array/buildingChoices"
         android:prompt="@string/Building1"
-        android:layout_gravity="left|center_vertical"
-        android:spinnerMode="dropdown" />
+        android:layout_gravity="left|top"
+        android:spinnerMode="dropdown"
+        android:textColor="#ff000000"
+        android:layout_marginTop="50dp"/>
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/buildingChoices"
+        android:prompt="@string/Building2"
+        android:layout_gravity="left|top"
+        android:spinnerMode="dropdown"
+        android:textColor="#ff000000"
+        android:layout_marginTop="110dp"/>
+
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/buildingChoices"
+        android:prompt="@string/Building3"
+        android:layout_gravity="left|top"
+        android:spinnerMode="dropdown"
+        android:textColor="#ff000000"
+        android:layout_marginTop="170dp"/>
+
+    <Spinner
+        android:id="@+id/spinner4"
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/buildingChoices"
+        android:prompt="@string/Building4"
+        android:layout_gravity="left|top"
+        android:spinnerMode="dropdown"
+        android:textColor="#ff000000"
+        android:layout_marginTop="230dp"/>
+
+    <Spinner
+        android:id="@+id/spinner5"
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/buildingChoices"
+        android:prompt="@string/Building5"
+        android:layout_gravity="left|top"
+        android:spinnerMode="dropdown"
+        android:textColor="#ff000000"
+        android:layout_marginTop="290dp"/>
+
+    <Spinner
+        android:id="@+id/spinner6"
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/buildingChoices"
+        android:prompt="@string/Building6"
+        android:layout_gravity="left|top"
+        android:spinnerMode="dropdown"
+        android:textColor="#ff000000"
+        android:layout_marginTop="350dp"/>
+
+    <EditText
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/Room1"
+        android:layout_gravity="right|top"
+        android:hint="Room1"
+        android:layout_marginTop="60dp"/>
+
+    <EditText
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/Room2"
+        android:layout_gravity="right|top"
+        android:hint="Room2"
+        android:layout_marginTop="120dp"/>
+
+    <EditText
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/Room3"
+        android:layout_gravity="right|top"
+        android:hint="Room3"
+        android:layout_marginTop="180dp"/>
+
+    <EditText
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/Room4"
+        android:layout_gravity="right|top"
+        android:hint="Room4"
+        android:layout_marginTop="240dp"/>
+
+    <EditText
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/Room5"
+        android:layout_gravity="right|top"
+        android:hint="Room5"
+        android:layout_marginTop="300dp"/>
+
+    <EditText
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/Room6"
+        android:layout_gravity="right|top"
+        android:hint="Room6"
+        android:layout_marginTop="360dp"/>
 
     <!--
 
