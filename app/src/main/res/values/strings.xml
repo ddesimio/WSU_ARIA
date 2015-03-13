@@ -10,7 +10,6 @@
     <string name="title_activity_poi">POIActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="checkRuss">Russ Engineering Center</string>
     <string name="title_activity_inside" />
     <string name="title_activity_schedule" />
     <string name="building_prompt">building_prompt</string>
