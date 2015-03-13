@@ -25,4 +25,31 @@
     <string name="Building5">Building5</string>
     <string name="Building6">Building6</string>
 
+    <string-array name="buildingChoices">
+        <item>Allyn Hall</item>
+        <item>Brehm Laboratory</item>
+        <item>Biological Sciences</item>
+        <item>Creative Arts Center</item>
+        <item>Campus Services</item>
+        <item>Diggs Laboratory</item>
+        <item>Dunbar Library</item>
+        <item>Fine Arts Building</item>
+        <item>Fawcett Hall</item>
+        <item>Hamilton Hall</item>
+        <item>Health Sciences</item>
+        <item>Joshi Research Center</item>
+        <item>Library Annex</item>
+        <item>Math and Micro</item>
+        <item>Millet Hall</item>
+        <item>Medical Sciences</item>
+        <item>Oelman Hall</item>
+        <item>Russ Engineering Center</item>
+        <item>Rike Hall</item>
+        <item>Student Union</item>
+        <item>University Hall</item>
+        <item>White Hall</item>
+    </string-array>
+
+
+
 </resources>
