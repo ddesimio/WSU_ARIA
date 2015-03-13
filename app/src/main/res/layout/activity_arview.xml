@@ -34,6 +34,18 @@
         android:layout_marginRight="8dp"
          />
 
+    <ImageButton
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|bottom"
+        android:onClick="refresh"
+        android:src="@drawable/refresh"
+        android:adjustViewBounds="true"
+        android:layout_marginRight="8dp"
+
+        />
+
     <ImageView
         android:id="@+id/russ"
         android:layout_width="wrap_content"

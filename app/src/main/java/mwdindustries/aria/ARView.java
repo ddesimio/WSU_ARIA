@@ -283,6 +283,15 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
             button3.setVisibility(View.INVISIBLE);
     }
 
+    //refresh button clicked
+    public void refresh(View view)
+    {
+        /**
+         * ANDY!!! CODE RIGHT IN HERE!
+         */
+    }
+
+
 }//end main class
 
 
