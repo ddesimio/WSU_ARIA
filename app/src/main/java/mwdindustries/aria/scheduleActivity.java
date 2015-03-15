@@ -20,33 +20,6 @@ public class scheduleActivity extends Activity implements AdapterView.OnItemSele
     private Spinner spinner1, spinner2, spinner3, spinner4, spinner5, spinner6;
     private Button btnSubmit;
 
-    //building list
-    String[] buildingChoices = new String[]
-            {
-                    "Allyn Hall",
-                    "Brehm Laboratory",
-                    "Biological Sciences",
-                    "Creative Arts Center",
-                    "Campus Services",
-                    "Diggs Laboratory",
-                    "Dunbar Library",
-                    "Fine Arts Building",
-                    "Fawcett Hall",
-                    "Hamilton Hall",
-                    "Health Sciences",
-                    "Joshi Research Center",
-                    "Library Annex",
-                    "Math and Micro",
-                    "Millet Hall",
-                    "Medical Sciences",
-                    "Oelman Hall",
-                    "Russ Engineering Center",
-                    "Rike Hall",
-                    "Student Union",
-                    "University Hall",
-                    "White Hall"
-            };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +28,13 @@ public class scheduleActivity extends Activity implements AdapterView.OnItemSele
 
         addListenerOnButton();
         addListenerOnSpinnerItemSelection();
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     } //end onCreate
 
     private void addListenerOnButton() {

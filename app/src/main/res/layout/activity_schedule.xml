@@ -64,8 +64,8 @@
         android:prompt="@string/Building1"
         android:layout_gravity="left|top"
         android:spinnerMode="dropdown"
-        android:textColor="#ff000000"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="73dp"
+        android:background="#ff000000" />
 
     <Spinner
         android:id="@+id/spinner2"
@@ -75,8 +75,8 @@
         android:prompt="@string/Building2"
         android:layout_gravity="left|top"
         android:spinnerMode="dropdown"
-        android:textColor="#ff000000"
-        android:layout_marginTop="110dp"/>
+        android:layout_marginTop="133dp"
+        android:background="#ff000000" />
 
     <Spinner
         android:id="@+id/spinner3"
@@ -86,8 +86,8 @@
         android:prompt="@string/Building3"
         android:layout_gravity="left|top"
         android:spinnerMode="dropdown"
-        android:textColor="#ff000000"
-        android:layout_marginTop="170dp"/>
+        android:layout_marginTop="193dp"
+        android:background="#ff000000" />
 
     <Spinner
         android:id="@+id/spinner4"
@@ -97,8 +97,8 @@
         android:prompt="@string/Building4"
         android:layout_gravity="left|top"
         android:spinnerMode="dropdown"
-        android:textColor="#ff000000"
-        android:layout_marginTop="230dp"/>
+        android:layout_marginTop="253dp"
+        android:background="#ff000000" />
 
     <Spinner
         android:id="@+id/spinner5"
@@ -108,8 +108,8 @@
         android:prompt="@string/Building5"
         android:layout_gravity="left|top"
         android:spinnerMode="dropdown"
-        android:textColor="#ff000000"
-        android:layout_marginTop="290dp"/>
+        android:layout_marginTop="313dp"
+        android:background="#ff000000" />
 
     <Spinner
         android:id="@+id/spinner6"
@@ -119,8 +119,8 @@
         android:prompt="@string/Building6"
         android:layout_gravity="left|top"
         android:spinnerMode="dropdown"
-        android:textColor="#ff000000"
-        android:layout_marginTop="350dp"/>
+        android:layout_marginTop="373dp"
+        android:background="#ff000000" />
 
     <EditText
         android:layout_width="128dp"
@@ -130,7 +130,8 @@
         android:id="@+id/Room1"
         android:layout_gravity="right|top"
         android:hint="Room1"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="60dp"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="128dp"
@@ -140,7 +141,8 @@
         android:id="@+id/Room2"
         android:layout_gravity="right|top"
         android:hint="Room2"
-        android:layout_marginTop="120dp"/>
+        android:layout_marginTop="120dp"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="128dp"
@@ -150,7 +152,8 @@
         android:id="@+id/Room3"
         android:layout_gravity="right|top"
         android:hint="Room3"
-        android:layout_marginTop="180dp"/>
+        android:layout_marginTop="180dp"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="128dp"
@@ -160,7 +163,8 @@
         android:id="@+id/Room4"
         android:layout_gravity="right|top"
         android:hint="Room4"
-        android:layout_marginTop="240dp"/>
+        android:layout_marginTop="240dp"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="128dp"
@@ -170,7 +174,8 @@
         android:id="@+id/Room5"
         android:layout_gravity="right|top"
         android:hint="Room5"
-        android:layout_marginTop="300dp"/>
+        android:layout_marginTop="300dp"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="128dp"
@@ -180,7 +185,8 @@
         android:id="@+id/Room6"
         android:layout_gravity="right|top"
         android:hint="Room6"
-        android:layout_marginTop="360dp"/>
+        android:layout_marginTop="360dp"
+        android:textColor="@android:color/black" />
 
     <!--
 

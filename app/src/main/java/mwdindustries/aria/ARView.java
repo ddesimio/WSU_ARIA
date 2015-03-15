@@ -264,7 +264,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         });
 
         //when far button clicked
-        near.setOnClickListener(new View.OnClickListener() {
+        far.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 scope = 2;

@@ -43,6 +43,8 @@
         android:src="@drawable/refresh"
         android:adjustViewBounds="true"
         android:layout_marginRight="8dp"
+        android:scaleX=".90"
+        android:scaleY=".90"
 
         />
 

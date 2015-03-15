@@ -25,6 +25,7 @@
     <string name="Building6">Building6</string>
 
     <string-array name="buildingChoices">
+        <item>None</item>
         <item>Allyn Hall</item>
         <item>Brehm Laboratory</item>
         <item>Biological Sciences</item>
