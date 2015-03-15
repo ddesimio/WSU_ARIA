@@ -13,7 +13,7 @@
     <string name="title_activity_inside" />
     <string name="title_activity_schedule" />
     <string name="building_prompt">building_prompt</string>
-    <string name="schedule">Class Schdule</string>
+    <string name="schedule">Class Schedule</string>
     <string name="Building">Building</string>
     <string name="Submit">Submit</string>
     <string name="Room">Room #</string>
