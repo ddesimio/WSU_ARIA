@@ -14,10 +14,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import mwdindustries.aria.util.AdvancedLocationService;
+
 
 public class POIActivity extends Activity {
 
     private static final String TAG = "POIActivity CLass";// for debug
+    private AdvancedLocationService als;
 
     //building list
     String[] pointsOfInterest = new String[]
@@ -80,7 +83,8 @@ public class POIActivity extends Activity {
             }
         });
 
-
+        // passes a pointer from this caller so that the service and this thread can communicate.
+        als = new AdvancedLocationService(this);
     } //end onCreate
 
     //public final ArrayList<String> currentSelections = new ArrayList<String>();
