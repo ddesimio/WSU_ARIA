@@ -47,8 +47,6 @@ public class scheduleActivity extends Activity implements AdapterView.OnItemSele
 
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
-        // FROM HERE DOWN STILL NEED TO INCLUDE THE OTHER FIVE SPINNERS
-
         btnSubmit.setOnClickListener(new OnClickListener() {
 
             @Override

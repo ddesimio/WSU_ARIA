@@ -14,6 +14,20 @@
         android:layout_gravity="left"
         android:id="@+id/mPreview" />
 
+    <ImageView
+        android:id="@+id/locateItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/russ"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:longClickable="true"
+        android:clickable="true"
+        android:onClick="getData"
+        />
+
     <ImageButton
         android:id="@+id/gear"
         android:layout_width="wrap_content"
@@ -48,393 +62,8 @@
 
         />
 
-    <ImageView
-        android:id="@+id/russ"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/russ"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
 
-    <ImageView
-        android:id="@+id/allyn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/allyn"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
 
-    <ImageView
-        android:id="@+id/arts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/arts"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/backward"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/backward"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/biosci1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/biosci1"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/biosci2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/biosci2"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/biosci"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/biosci"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/brehm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/brehm"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/diggs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/diggs"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/dunbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/dunbar"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/elevator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/elevator"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/exit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/exit"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/fawcett"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/fawcett"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/finearts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/finearts"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/forward"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/forward"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/hamilton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/hamilton"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/health"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/health"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/joshi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/joshi"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/left"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/mathmicro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/mathmicro"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/medsci"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/medsci"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/millet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/millet"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/oelman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/oelman"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/restroom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/restroom"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/right"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/rike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/rike"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/stairs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/stairs"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/union"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/union"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/university"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/university"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
-
-    <ImageView
-        android:id="@+id/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/white"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        />
 
     <Button android:text=" Indoors  "
         android:id="@+id/BtnIndoor"
@@ -512,5 +141,20 @@
         android:visibility="invisible"
         android:textColor="#ff0cfff6">
     </Button>
+
+    <TextView
+        android:id="@+id/infoWindow"
+        android:layout_width="136dp"
+        android:layout_height="182dp"
+        android:maxLines = "500"
+        android:gravity="center"
+        android:scrollbars = "vertical"
+        android:visibility="invisible"
+        android:textColor="#0cfff6"
+        android:text=""
+        android:textSize="12dp"
+        android:layout_gravity="right|center_vertical"
+        android:longClickable="true"
+        />
 
 </FrameLayout>

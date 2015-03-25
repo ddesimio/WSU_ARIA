@@ -1,6 +1,8 @@
 package mwdindustries.aria;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -13,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import static junit.runner.BaseTestRunner.savePreferences;
 
 
 public class POIActivity extends Activity {
@@ -53,6 +57,10 @@ public class POIActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_poi);
+
+//        SharedPreferences indoors = getSharedPreferences("Indoor", Context.MODE_PRIVATE);
+//        Boolean exits = indoors.getBoolean("exits",false);
+
 
         // The checkbox for the each item is specified by the layout android.R.layout.simple_list_item_multiple_choice
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, pointsOfInterest)
@@ -99,6 +107,9 @@ public class POIActivity extends Activity {
 
                 //add item to currentSelections list
                 currentSelections.add(item);
+
+                //save state?
+
             }
 
         }

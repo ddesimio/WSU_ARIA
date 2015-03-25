@@ -1,6 +1,8 @@
 package mwdindustries.aria;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -60,6 +62,7 @@ public class insidePOI extends Activity {
         listViewPOI.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 displayToTextView(listViewPOI);
             }
         });
@@ -72,6 +75,8 @@ public class insidePOI extends Activity {
     //method called by every checkboxlist click to update current selections
     public void displayToTextView(ListView theList)
     {
+//        SharedPreferences indoors = getSharedPreferences("Indoor", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor edit= indoors.edit();
         //get checked items
         final ArrayList<String> currentSelections = new ArrayList<String>();
         int len = theList.getCount();
@@ -83,9 +88,13 @@ public class insidePOI extends Activity {
 
                 //add item to currentSelections list
                 currentSelections.add(item);
+//                edit.putBoolean("exits", true);
             }
 
+
+
         }
+//        edit.commit();
 
         TextView tv = (TextView) findViewById(R.id.currentSelections_textView);
 
