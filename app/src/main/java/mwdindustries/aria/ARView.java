@@ -45,6 +45,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
         locateItem = (ImageView)findViewById(R.id.locateItems);
         infoDisplay = (TextView)findViewById(R.id.infoWindow);
+        getImage("thebent");
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
@@ -65,43 +66,24 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         //doesn't let phone lock/go to sleep
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        /**
-         * <DEBUGGING>
-         */
 
-//        ImageButton theGear = (ImageButton)findViewById(R.id.gear);
-//        theGear.setOnClickListener(new View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View v) {
-//                View view = null;
-//                gearButton(view);
-//            }
-//        });
-//
-        getImage("thebent");
-
-        /**
-         * </DEBUGGING>
-         */
-
-        //detect long press
-        //infoDisplay
-        infoDisplay.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                infoDisplay.setVisibility(View.INVISIBLE);
-                return false;
-            }
-        });
-
-        //detect long press
+        //detect long press -> make invisible
         //locateItem
         locateItem.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 locateItem.setVisibility(View.INVISIBLE);
-                return false;
+                return true;
+            }
+        });
+
+        //detect long press -> make invisible
+        //infoDisplay
+        infoDisplay.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                infoDisplay.setVisibility(View.INVISIBLE);
+                return true;
             }
         });
 
@@ -408,8 +390,6 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
     //used to get extra information about selected label
     public void getData(View view)
     {
-
-
         //ImageView selected = (ImageView) findViewById(R.id.locateItems);
         TextView myTextView = (TextView)findViewById(R.id.infoWindow);
         myTextView.setMovementMethod(new ScrollingMovementMethod());
@@ -422,7 +402,6 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
         //show text view
         infoDisplay.setVisibility(View.VISIBLE);
-
 
     }
 

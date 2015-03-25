@@ -155,6 +155,7 @@
         android:textSize="12dp"
         android:layout_gravity="right|center_vertical"
         android:longClickable="true"
+        android:clickable="false"
         />
 
 </FrameLayout>
