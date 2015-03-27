@@ -36,7 +36,18 @@
         the cornerstone of the engineering college\'s mission of serving its students, faculty, and
         industrial partners throughout the Miami Valley. Completed in 1992, it was named for Fritz
         and Dolores Russ, the founders of Systems Research Laboratories Inc.
-        </string>
+    </string>
+
+    <string name="studentUnion">Completed in 1994, 2007 renovations transformed this building. The
+        Student Union offers a fitness center, a rock climbing wall; student lounges; racquetball
+        courts; a pool; and meeting rooms. Various offices located in the Student Union include:
+        Admissions, Raider Connect, Transfer Student Center, Wright1 Card, Career Services, School
+        of Graduate Studies, Counseling and Wellness Services, Student Legal Services, Community
+        Standards and Student Conduct, Disability Services, the Guardian, Nexus, WWSU 106.9FM Radio
+        Station, Student Activities, Student Health Services, Commuter Lounge, Student Government,
+        student organizations, the WSU Bookstore, Wright-Patt Credit Union, Wright Copy, Center for
+        International Education, and the Union Market.
+    </string>
 
     <string-array name="buildingChoices">
         <item>None</item>

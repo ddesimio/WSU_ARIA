@@ -57,7 +57,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         infoDisplay3 = (TextView)findViewById(R.id.infoWindow3);
 
         //test call - String: image resource name, ImageView: 1 of 3 to set image to
-        getImage("russ", locateItem3);
+        getImage("union", locateItem2);
 
         //force screen orientation to landscape
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -559,6 +559,10 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         {
             myTextView.setText(R.string.RussEngineering);
         }
+        else if(locateItem1.getTag().equals("union"))
+        {
+            myTextView.setText(R.string.studentUnion);
+        }
         //else if... rest of objects
 
         myTextView.setVisibility(View.VISIBLE);
@@ -580,6 +584,10 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         {
             myTextView.setText(R.string.RussEngineering);
         }
+        else if(locateItem2.getTag().equals("union"))
+        {
+            myTextView.setText(R.string.studentUnion);
+        }
         //else if... rest of objects
 
         myTextView.setVisibility(View.VISIBLE);
@@ -600,6 +608,10 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         else if(locateItem3.getTag().equals("russ"))
         {
             myTextView.setText(R.string.RussEngineering);
+        }
+        else if(locateItem3.getTag().equals("union"))
+        {
+            myTextView.setText(R.string.studentUnion);
         }
         //else if... rest of objects
 
