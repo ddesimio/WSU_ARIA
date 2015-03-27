@@ -23,12 +23,20 @@
     <string name="Building4">Building4</string>
     <string name="Building5">Building5</string>
     <string name="Building6">Building6</string>
+
     <string name="theBent">The Tau Beta Pi Association, Inc., the engineering honor society, was
         founded at Lehigh University in 1885 by Dr. Edward Higginson Williams Jr. “to mark in a
         fitting manner those who have conferred honor upon their Alma Mater by distinguished scholarship
         and exemplary character as undergraduates in engineering, or by their attainments as alumni
         in the field of engineering, and to foster a spirit of liberal culture in engineering colleges.”
-        —Permeable to the Constitution.</string>
+        —Permeable to the Constitution.
+    </string>
+
+    <string name="RussEngineering">The Center is the largest academic building on campus, and provides
+        the cornerstone of the engineering college\'s mission of serving its students, faculty, and
+        industrial partners throughout the Miami Valley. Completed in 1992, it was named for Fritz
+        and Dolores Russ, the founders of Systems Research Laboratories Inc.
+        </string>
 
     <string-array name="buildingChoices">
         <item>None</item>

@@ -7,17 +7,14 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +23,8 @@ import java.util.List;
 
 public class ARView extends Activity implements SurfaceHolder.Callback{
 
+    private static final String TAG = "POIActivity CLass";// for debug
+
     final int NEAR = 0;
     final int MID  = 1;
     final int FAR  = 2;
@@ -33,8 +32,12 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
     Camera mCamera;
     SurfaceView mPreview;
-    ImageView locateItem;
-    TextView infoDisplay;
+    ImageView locateItem1;
+    ImageView locateItem2;
+    ImageView locateItem3;
+    TextView infoDisplay1;
+    TextView infoDisplay2;
+    TextView infoDisplay3;
 
 
     @Override
@@ -43,16 +46,26 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_arview);
 
-        locateItem = (ImageView)findViewById(R.id.locateItems);
-        infoDisplay = (TextView)findViewById(R.id.infoWindow);
-        getImage("thebent");
+        //set imageViews
+        locateItem1 = (ImageView)findViewById(R.id.locateItems1);
+        locateItem2 = (ImageView)findViewById(R.id.locateItems2);
+        locateItem3 = (ImageView)findViewById(R.id.locateItems3);
 
+        //set textViews
+        infoDisplay1 = (TextView)findViewById(R.id.infoWindow1);
+        infoDisplay2 = (TextView)findViewById(R.id.infoWindow2);
+        infoDisplay3 = (TextView)findViewById(R.id.infoWindow3);
+
+        //test call - String: image resource name, ImageView: 1 of 3 to set image to
+        getImage("russ", locateItem3);
+
+        //force screen orientation to landscape
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
+        //set camera preview
         mPreview = (SurfaceView)findViewById(R.id.mPreview);
         mPreview.getHolder().addCallback(this);
         mPreview.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
         mCamera = Camera.open();
 
         //touch to autofocus
@@ -68,21 +81,61 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
 
         //detect long press -> make invisible
-        //locateItem
-        locateItem.setOnLongClickListener(new View.OnLongClickListener() {
+        //locateItem1
+        locateItem1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                locateItem.setVisibility(View.INVISIBLE);
+                locateItem1.setVisibility(View.INVISIBLE);
                 return true;
             }
         });
 
         //detect long press -> make invisible
-        //infoDisplay
-        infoDisplay.setOnLongClickListener(new View.OnLongClickListener() {
+        //infoDisplay1
+        infoDisplay1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                infoDisplay.setVisibility(View.INVISIBLE);
+                infoDisplay1.setVisibility(View.INVISIBLE);
+                return true;
+            }
+        });
+
+        //detect long press -> make invisible
+        //locateItem1
+        locateItem2.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                locateItem2.setVisibility(View.INVISIBLE);
+                return true;
+            }
+        });
+
+        //detect long press -> make invisible
+        //infoDisplay1
+        infoDisplay2.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                infoDisplay2.setVisibility(View.INVISIBLE);
+                return true;
+            }
+        });
+
+        //detect long press -> make invisible
+        //locateItem1
+        locateItem3.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                locateItem3.setVisibility(View.INVISIBLE);
+                return true;
+            }
+        });
+
+        //detect long press -> make invisible
+        //infoDisplay1
+        infoDisplay3.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                infoDisplay3.setVisibility(View.INVISIBLE);
                 return true;
             }
         });
@@ -191,26 +244,6 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         startActivity(scheduler);
     }
 
-//    //test to show image
-//    public void showImage (View view)
-//    {
-//        ImageView russImage = (ImageView) findViewById(R.id.russ);
-//
-//        //int resID = getResources().getIdentifier(imageName , "drawable", getPackageName());
-//
-//        if(russImage.getVisibility() == View.VISIBLE)
-//        {
-//            russImage.setVisibility(View.INVISIBLE);
-//        }
-//        else
-//        {
-//            russImage.setVisibility(View.VISIBLE);
-//        }
-//
-//    }
-
-
-
     //gear button clicked
     public void gearButton(View view)
     {
@@ -315,93 +348,262 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
     //method to access images from drawable-mdpi
     //only will display one at a time (NEEDS TO BE MORE)
-    public void getImage (String imageName)
+    public void getImage (String imageName, ImageView view)
     {
         if(imageName.equals("allyn"))
-            locateItem.setImageResource(R.drawable.allyn);
+        {
+            view.setImageResource(R.drawable.allyn);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("arts"))
-            locateItem.setImageResource(R.drawable.arts);
+        {
+            view.setImageResource(R.drawable.arts);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("backward"))
-            locateItem.setImageResource(R.drawable.backward);
+        {
+            view.setImageResource(R.drawable.backward);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("biosci"))
-            locateItem.setImageResource(R.drawable.biosci);
+        {
+            view.setImageResource(R.drawable.biosci);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("biosci1"))
-            locateItem.setImageResource(R.drawable.biosci1);
+        {
+            view.setImageResource(R.drawable.biosci1);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("biosci2"))
-            locateItem.setImageResource(R.drawable.biosci2);
+        {
+            view.setImageResource(R.drawable.biosci2);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("brehm"))
-            locateItem.setImageResource(R.drawable.brehm);
+        {
+            view.setImageResource(R.drawable.brehm);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("diggs"))
-            locateItem.setImageResource(R.drawable.diggs);
+        {
+            view.setImageResource(R.drawable.diggs);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("dunbar"))
-            locateItem.setImageResource(R.drawable.dunbar);
+        {
+            view.setImageResource(R.drawable.dunbar);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("elevator"))
-            locateItem.setImageResource(R.drawable.elevator);
+        {
+            view.setImageResource(R.drawable.elevator);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("exit"))
-            locateItem.setImageResource(R.drawable.exit);
+        {
+            view.setImageResource(R.drawable.exit);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("fawcett"))
-            locateItem.setImageResource(R.drawable.fawcett);
+        {
+            view.setImageResource(R.drawable.fawcett);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("finearts"))
-            locateItem.setImageResource(R.drawable.finearts);
+        {
+            view.setImageResource(R.drawable.finearts);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("forward"))
-            locateItem.setImageResource(R.drawable.forward);
+        {
+            view.setImageResource(R.drawable.forward);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("hamilton"))
-            locateItem.setImageResource(R.drawable.hamilton);
+        {
+            view.setImageResource(R.drawable.hamilton);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("health"))
-            locateItem.setImageResource(R.drawable.health);
+        {
+            view.setImageResource(R.drawable.health);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("joshi"))
-            locateItem.setImageResource(R.drawable.joshi);
+        {
+            view.setImageResource(R.drawable.joshi);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("left"))
-            locateItem.setImageResource(R.drawable.left);
+        {
+            view.setImageResource(R.drawable.left);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("mathmicro"))
-            locateItem.setImageResource(R.drawable.mathmicro);
+        {
+            view.setImageResource(R.drawable.mathmicro);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("medsci"))
-            locateItem.setImageResource(R.drawable.medsci);
+        {
+            view.setImageResource(R.drawable.medsci);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("millet"))
-            locateItem.setImageResource(R.drawable.millet);
+        {
+            view.setImageResource(R.drawable.millet);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("oelman"))
-            locateItem.setImageResource(R.drawable.oelman);
+        {
+            view.setImageResource(R.drawable.oelman);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("restroom"))
-            locateItem.setImageResource(R.drawable.restroom);
+        {
+            view.setImageResource(R.drawable.restroom);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("right"))
-            locateItem.setImageResource(R.drawable.right);
+        {
+            view.setImageResource(R.drawable.right);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("rike"))
-            locateItem.setImageResource(R.drawable.rike);
+        {
+            view.setImageResource(R.drawable.rike);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("russ"))
-            locateItem.setImageResource(R.drawable.russ);
+        {
+            view.setImageResource(R.drawable.russ);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("stairs"))
-            locateItem.setImageResource(R.drawable.stairs);
+        {
+            view.setImageResource(R.drawable.stairs);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("thebent"))
-            locateItem.setImageResource(R.drawable.thebent);
+        {
+            view.setImageResource(R.drawable.thebent);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("union"))
-            locateItem.setImageResource(R.drawable.union);
+        {
+            view.setImageResource(R.drawable.union);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("university"))
-            locateItem.setImageResource(R.drawable.university);
+        {
+            view.setImageResource(R.drawable.university);
+            view.setTag(imageName);
+        }
+
         else if(imageName.equals("white"))
-            locateItem.setImageResource(R.drawable.white);
+        {
+            view.setImageResource(R.drawable.white);
+            view.setTag(imageName);
+        }
 
 
-        locateItem.setVisibility(View.VISIBLE);
+        //set imageview visible
+        view.setVisibility(View.VISIBLE);
 
         return;
 
     }//end getImage
 
-    //used to get extra information about selected label
-    public void getData(View view)
+    //used to get extra information about selected label for textview 1
+    public void getDataFirst(View view)
     {
         //ImageView selected = (ImageView) findViewById(R.id.locateItems);
-        TextView myTextView = (TextView)findViewById(R.id.infoWindow);
+        TextView myTextView = (TextView)findViewById(R.id.infoWindow1);
         myTextView.setMovementMethod(new ScrollingMovementMethod());
 
-        //if( selected.getResources().equals(R.drawable.thebent)) {
-            //infoDisplay.setText(R.string.theBent);
-            infoDisplay.setText(R.string.theBent);
-        //}
-        //else if... rest of art
+        if(locateItem1.getTag().equals("thebent"))
+        {
+            myTextView.setText(R.string.theBent);
+        }
+        else if(locateItem1.getTag().equals("russ"))
+        {
+            myTextView.setText(R.string.RussEngineering);
+        }
+        //else if... rest of objects
 
-        //show text view
-        infoDisplay.setVisibility(View.VISIBLE);
+        myTextView.setVisibility(View.VISIBLE);
+
+    }
+
+    //used to get extra information about selected label for textview 2
+    public void getDataSecond(View view)
+    {
+        //ImageView selected = (ImageView) findViewById(R.id.locateItems);
+        TextView myTextView = (TextView)findViewById(R.id.infoWindow2);
+        myTextView.setMovementMethod(new ScrollingMovementMethod());
+
+        if(locateItem2.getTag().equals("thebent"))
+        {
+            myTextView.setText(R.string.theBent);
+        }
+        else if(locateItem2.getTag().equals("russ"))
+        {
+            myTextView.setText(R.string.RussEngineering);
+        }
+        //else if... rest of objects
+
+        myTextView.setVisibility(View.VISIBLE);
+
+    }
+
+    //used to get extra information about selected label for textview 3
+    public void getDataThird(View view)
+    {
+        //ImageView selected = (ImageView) findViewById(R.id.locateItems);
+        TextView myTextView = (TextView)findViewById(R.id.infoWindow3);
+        myTextView.setMovementMethod(new ScrollingMovementMethod());
+
+        if(locateItem3.getTag().equals("thebent"))
+        {
+            myTextView.setText(R.string.theBent);
+        }
+        else if(locateItem3.getTag().equals("russ"))
+        {
+            myTextView.setText(R.string.RussEngineering);
+        }
+        //else if... rest of objects
+
+        myTextView.setVisibility(View.VISIBLE);
 
     }
 
