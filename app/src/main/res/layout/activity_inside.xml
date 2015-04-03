@@ -46,6 +46,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/currentSelections_textView"
                 android:textColor="#ff000000"
+                android:maxLines = "500"
+                android:scrollbars = "vertical"
                 android:layout_marginTop="30dp"/>
 
             <TextView

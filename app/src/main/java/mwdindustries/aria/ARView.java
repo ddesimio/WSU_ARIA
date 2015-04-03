@@ -39,6 +39,10 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
     TextView infoDisplay2;
     TextView infoDisplay3;
 
+    //create intents
+    Intent scheduler = new Intent(this, scheduleActivity.class);
+    Intent outdoorPOIcheckBoxes = new Intent(this, POIActivity.class);
+    Intent indoorPOIcheckBoxes = new Intent(this, insidePOI.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,21 +230,21 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
     //for indoor POI selection
     public void indoorPOI(View view)
     {
-        Intent indoorPOIcheckBoxes = new Intent(this, insidePOI.class);
+        //Intent indoorPOIcheckBoxes = new Intent(this, insidePOI.class);
         startActivity(indoorPOIcheckBoxes);
     }
 
     //for outdoor POI selection
     public void outdoorPOI(View view)
     {
-        Intent outdoorPOIcheckBoxes = new Intent(this, POIActivity.class);
+        //Intent outdoorPOIcheckBoxes = new Intent(this, POIActivity.class);
         startActivity(outdoorPOIcheckBoxes);
     }
 
     //for schedule button click
     public void scheduleInput(View view)
     {
-        Intent scheduler = new Intent(this, scheduleActivity.class);
+        //Intent scheduler = new Intent(this, scheduleActivity.class);
         startActivity(scheduler);
     }
 

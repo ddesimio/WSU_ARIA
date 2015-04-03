@@ -3,6 +3,7 @@ package mwdindustries.aria;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -23,6 +24,9 @@ public class insidePOI extends Activity {
 
     private static final String TAG = "POIActivity CLass";// for debug
 
+    //for access to a list of currently selected POI's
+    ArrayList<String> insidePOIList = new ArrayList<String>();
+
     //building list
     String[] insidePOIs = new String[]
             {
@@ -39,6 +43,9 @@ public class insidePOI extends Activity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_inside);
+
+        //force screen orientation to landscape
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         // The checkbox for the each item is specified by the layout android.R.layout.simple_list_item_multiple_choice
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, insidePOIs)
@@ -88,6 +95,7 @@ public class insidePOI extends Activity {
 
                 //add item to currentSelections list
                 currentSelections.add(item);
+                insidePOIList.add(item);
 //                edit.putBoolean("exits", true);
             }
 
@@ -111,5 +119,11 @@ public class insidePOI extends Activity {
         tv.setText(toDisplay);
 
     }//end displayToTextView
+
+    //return selected list --- to be called from main class
+    public ArrayList getInsideSelections()
+    {
+        return insidePOIList;
+    }
 
 }

@@ -3,8 +3,10 @@ package mwdindustries.aria;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,9 @@ import static junit.runner.BaseTestRunner.savePreferences;
 public class POIActivity extends Activity {
 
     private static final String TAG = "POIActivity CLass";// for debug
+
+    //for access to a list of currently selected POI's
+    ArrayList<String> outsidePOIList = new ArrayList<String>();
 
     //building list
     String[] pointsOfInterest = new String[]
@@ -60,6 +65,9 @@ public class POIActivity extends Activity {
 
 //        SharedPreferences indoors = getSharedPreferences("Indoor", Context.MODE_PRIVATE);
 //        Boolean exits = indoors.getBoolean("exits",false);
+
+        //force screen orientation to landscape
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
 
         // The checkbox for the each item is specified by the layout android.R.layout.simple_list_item_multiple_choice
@@ -107,14 +115,13 @@ public class POIActivity extends Activity {
 
                 //add item to currentSelections list
                 currentSelections.add(item);
-
-                //save state?
-
+                outsidePOIList.add(item);
             }
 
         }
 
         TextView tv = (TextView) findViewById(R.id.currentSelections_textView);
+        tv.setMovementMethod(new ScrollingMovementMethod());
 
         String toDisplay = "";
 
@@ -130,6 +137,21 @@ public class POIActivity extends Activity {
 
     }//end displayToTextView
 
-    
+    //return selected list --- to be called from main class
+    public ArrayList getInsideSelections()
+    {
+        return outsidePOIList;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
 
 }// end class
