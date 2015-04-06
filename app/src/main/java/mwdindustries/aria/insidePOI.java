@@ -77,7 +77,6 @@ public class insidePOI extends Activity {
 
     } //end onCreate
 
-    //public final ArrayList<String> currentSelections = new ArrayList<String>();
 
     //method called by every checkboxlist click to update current selections
     public void displayToTextView(ListView theList)

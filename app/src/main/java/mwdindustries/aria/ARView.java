@@ -39,11 +39,6 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
     TextView infoDisplay2;
     TextView infoDisplay3;
 
-    //create intents
-    //Intent scheduler = new Intent(this, scheduleActivity.class);
-    //Intent outdoorPOIcheckBoxes = new Intent(this, POIActivity.class);
-    //Intent indoorPOIcheckBoxes = new Intent(this, insidePOI.class);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +80,6 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
 
         //detect long press -> make invisible
-        //locateItem1
         locateItem1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -95,7 +89,6 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         });
 
         //detect long press -> make invisible
-        //infoDisplay1
         infoDisplay1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -105,7 +98,6 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         });
 
         //detect long press -> make invisible
-        //locateItem1
         locateItem2.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -115,7 +107,6 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         });
 
         //detect long press -> make invisible
-        //infoDisplay1
         infoDisplay2.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -125,7 +116,6 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         });
 
         //detect long press -> make invisible
-        //locateItem1
         locateItem3.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -135,7 +125,6 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         });
 
         //detect long press -> make invisible
-        //infoDisplay1
         infoDisplay3.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -206,7 +195,10 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         mCamera.release();
     }
 
-    //if poi button clicked
+    /** sendPOIList: called with triple dot button is pushed to display buttons for
+     *              inside and outside POI selection options
+     * @param view: this is what needed to be here for using the 'onclick' from the xml file
+     */
     public void sendPOIList(View view) {
 
         //create buttons to select inside out outside POIs
@@ -227,28 +219,43 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
     }//end sendPOIList
 
-    //for indoor POI selection
+
+    /** indoorPOI: starts new activity to allow users to select indoor points of interest
+     *
+     * @param view this is what needed to be here for using the 'onclick' from the xml file
+     */
     public void indoorPOI(View view)
     {
         Intent indoorPOIcheckBoxes = new Intent(this, insidePOI.class);
         startActivity(indoorPOIcheckBoxes);
     }
 
-    //for outdoor POI selection
+    /** outdoorPOI: starts a new activity to allow users to select outdoor points of interest
+     *
+     * @param view this is what needed to be here for using the 'onclick' from the xml files
+     */
     public void outdoorPOI(View view)
     {
         Intent outdoorPOIcheckBoxes = new Intent(this, POIActivity.class);
         startActivity(outdoorPOIcheckBoxes);
     }
 
-    //for schedule button click
+
+    /** scheduleInput: starts activity to let user input schedule building name and room number
+     *
+     * @param view this is what needed to be here for using the 'onclick' from the xml file
+     */
     public void scheduleInput(View view)
     {
         Intent scheduler = new Intent(this, scheduleActivity.class);
         startActivity(scheduler);
     }
 
-    //gear button clicked
+
+    /** gearButton: displays schedule and scope buttons
+     *
+     * @param view this is what needed to be here for using the 'onclick' from the xml file
+     */
     public void gearButton(View view)
     {
         //create buttons
@@ -273,9 +280,12 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
             schedule.setVisibility(View.VISIBLE);
         }
 
-    }
+    }// end gearButton
 
-    //scope button clicked
+    /** scopePOI: display scope options for user to select notification distances
+     *
+     * @param view this is what needed to be here for using the 'onclick' from the xml file
+     */
     public void scopePOI(View view)
     {
         //create buttons
@@ -299,7 +309,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
             far.setVisibility(View.VISIBLE);
         }
 
-        //when near button clicked
+        //when near button clicked => scope = 0
         near.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -310,7 +320,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
             }
         });
 
-        //when mid button clicked
+        //when mid button clicked => scope = 1
         mid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -321,7 +331,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
             }
         });
 
-        //when far button clicked
+        //when far button clicked => scope = 2
         far.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -334,7 +344,13 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
     }
 
-    //called to hide buttons on scope selection
+
+    /** hideButtons: hides scope option buttons
+     *
+     * @param button1: first button passed in to hide
+     * @param button2: second button passed in to hide
+     * @param button3: third button passed in to hide
+     */
     public void hideButtons(Button button1, Button button2, Button button3)
     {
             button1.setVisibility(View.INVISIBLE);
@@ -342,16 +358,15 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
             button3.setVisibility(View.INVISIBLE);
     }
 
-    //refresh button clicked
-    public void refresh(View view)
-    {
-        /**
-         * ANDY!!! CODE RIGHT IN HERE!
-         */
-    }
 
-    //method to access images from drawable-mdpi
-    //only will display one at a time (NEEDS TO BE MORE)
+    /** getImage: get and set image to imageview
+     *
+     * @param imageName: string name of image to use set to the imageview
+     * @param view 1 of 3 imageview options to use
+     *
+     * Pre-condition: pass in name of image to use and desired imageview to set image to
+     * Post-condition: a clickable label will appear showing the image whose name was passed in
+     */
     public void getImage (String imageName, ImageView view)
     {
         if(imageName.equals("allyn"))
@@ -548,10 +563,13 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
     }//end getImage
 
-    //used to get extra information about selected label for textview 1
+
+    /** getDataFirst: used to get extra information about selected label for textview 2
+     *
+     * @param view this is what needed to be here for using the 'onclick' from the xml file
+     */
     public void getDataFirst(View view)
     {
-        //ImageView selected = (ImageView) findViewById(R.id.locateItems);
         TextView myTextView = (TextView)findViewById(R.id.infoWindow1);
         myTextView.setMovementMethod(new ScrollingMovementMethod());
 
@@ -573,7 +591,11 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
     }
 
-    //used to get extra information about selected label for textview 2
+
+    /** getDataSecond: used to get extra information about selected label for textview 2
+     *
+     * @param view this is what needed to be here for using the 'onclick' from the xml file
+     */
     public void getDataSecond(View view)
     {
         //ImageView selected = (ImageView) findViewById(R.id.locateItems);
@@ -598,7 +620,11 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
     }
 
-    //used to get extra information about selected label for textview 3
+
+    /** getDataThird: used to get extra information about selected label for textview 3
+     *
+     * @param view this is what needed to be here for using the 'onclick' from the xml file
+     */
     public void getDataThird(View view)
     {
         //ImageView selected = (ImageView) findViewById(R.id.locateItems);
@@ -623,12 +649,24 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
     }
 
-    //rotate image
+    /** rotateImage: used to rotate onscreen label so they remain accurate with user movement
+     *
+     * @param view: which imageview is to be rotated
+     * @param angle: the angle to rotate passed in imageview to
+     */
     public void rotateImage(ImageView view, float angle)
     {
-        //view.ro
+        //view.rotate
     }
 
+    /** refresh: when refresh button clicked => manually update location and angle
+     *
+     * @param view this is what needed to be here for using the 'onclick' from the xml file
+     */
+    public void refresh(View view)
+    {
+        //refresh some things
+    }
 
 }//end main class
 
