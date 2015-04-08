@@ -2,6 +2,7 @@ package mwdindustries.aria;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -26,7 +27,8 @@ public class scheduleActivity extends Activity implements AdapterView.OnItemSele
     private Button btnSubmit;
     EditText roomOne, roomTwo, roomThree, roomFour, roomFive, roomSix;
 
-    SharedPreferences.Editor editor = getSharedPreferences("myPrefs", MODE_PRIVATE).edit();
+
+    //SharedPreferences.Editor editor = getSharedPreferences("myPrefs", MODE_PRIVATE).edit();
 
     //arrays to hole list of strings
     ArrayList<String> roomNumberList = new ArrayList<String>();
@@ -44,7 +46,7 @@ public class scheduleActivity extends Activity implements AdapterView.OnItemSele
         addListenerOnButton();
         addListenerOnSpinnerItemSelection();
 
-
+       final Intent intent = new Intent(this, ARView.class);
 
         //create room number edit text boxes
     roomOne = (EditText) findViewById(R.id.Room1);
@@ -54,56 +56,63 @@ public class scheduleActivity extends Activity implements AdapterView.OnItemSele
     roomFive = (EditText) findViewById(R.id.Room5);
     roomSix = (EditText) findViewById(R.id.Room6);
 
-        //when submit button clicked
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //clear current list of rooms
-                roomNumberList.clear();
-
-                //clear current list of buildings
-                buildingsList.clear();
-
-//                //get room numbers entered
-                String roomOneSelection = roomOne.getText().toString();
-                String roomTwoSelection = roomTwo.getText().toString();
-                String roomThreeSelection = roomThree.getText().toString();
-                String roomFourSelection = roomFour.getText().toString();
-                String roomFiveSelection = roomFive.getText().toString();
-                String roomSixSelection = roomSix.getText().toString();
-
-                //store room numbers in array
-                roomNumberList.add(roomOneSelection);
-                roomNumberList.add(roomTwoSelection);
-                roomNumberList.add(roomThreeSelection);
-                roomNumberList.add(roomFourSelection);
-                roomNumberList.add(roomFiveSelection);
-                roomNumberList.add(roomSixSelection);
-
-                //add spinner values to array
-                buildingsList.add(String.valueOf(spinner1.getSelectedItem()));
-                buildingsList.add(String.valueOf(spinner2.getSelectedItem()));
-                buildingsList.add(String.valueOf(spinner3.getSelectedItem()));
-                buildingsList.add(String.valueOf(spinner4.getSelectedItem()));
-                buildingsList.add(String.valueOf(spinner5.getSelectedItem()));
-                buildingsList.add(String.valueOf(spinner6.getSelectedItem()));
-
-                editor.putString("room1", roomOne.getText().toString());
-                editor.putString("room2", roomTwo.getText().toString());
-                editor.putString("room3", roomThree.getText().toString());
-                editor.putString("room4", roomFour.getText().toString());
-                editor.putString("room5", roomFive.getText().toString());
-                editor.putString("room6", roomSix.getText().toString());
-
-                //end activity
-                finish();
-                //scheduleActivity.moveTaskToBack(true);
-            }
-        });
+//        //when submit button clicked
+//        btnSubmit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                //clear current list of rooms
+//                roomNumberList.clear();
+//
+//                //clear current list of buildings
+//                buildingsList.clear();
+//
+////                //get room numbers entered
+//                String roomOneSelection = roomOne.getText().toString();
+//                String roomTwoSelection = roomTwo.getText().toString();
+//                String roomThreeSelection = roomThree.getText().toString();
+//                String roomFourSelection = roomFour.getText().toString();
+//                String roomFiveSelection = roomFive.getText().toString();
+//                String roomSixSelection = roomSix.getText().toString();
+//
+//                //store room numbers in array
+//                roomNumberList.add(roomOneSelection);
+//                roomNumberList.add(roomTwoSelection);
+//                roomNumberList.add(roomThreeSelection);
+//                roomNumberList.add(roomFourSelection);
+//                roomNumberList.add(roomFiveSelection);
+//                roomNumberList.add(roomSixSelection);
+//
+//                //add spinner values to array
+//                buildingsList.add(String.valueOf(spinner1.getSelectedItem()));
+//                buildingsList.add(String.valueOf(spinner2.getSelectedItem()));
+//                buildingsList.add(String.valueOf(spinner3.getSelectedItem()));
+//                buildingsList.add(String.valueOf(spinner4.getSelectedItem()));
+//                buildingsList.add(String.valueOf(spinner5.getSelectedItem()));
+//                buildingsList.add(String.valueOf(spinner6.getSelectedItem()));
+//
+////                editor.putString("room1", roomOne.getText().toString());
+////                editor.putString("room2", roomTwo.getText().toString());
+////                editor.putString("room3", roomThree.getText().toString());
+////                editor.putString("room4", roomFour.getText().toString());
+////                editor.putString("room5", roomFive.getText().toString());
+////                editor.putString("room6", roomSix.getText().toString());
+//
+//                //end activity
+//                //moveTaskToBack(true);
+//
+//                //startActivity(intent);
+//                //finish();
+//            }
+//});
 
 
     } //end onCreate
+
+    @Override
+    public void onBackPressed() {
+        //scheduleActivity.moveTaskToBack(true);
+    }
 
     //save activity state
     @Override
@@ -159,7 +168,7 @@ public class scheduleActivity extends Activity implements AdapterView.OnItemSele
         spinner5 = (Spinner) findViewById(R.id.spinner5);
         spinner6 = (Spinner) findViewById(R.id.spinner6);
 
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        //btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
     }
 

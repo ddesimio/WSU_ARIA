@@ -48,13 +48,13 @@
         android:layout_marginTop="30dp"/>
 
 
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Submit"
-        android:layout_gravity="center_horizontal|bottom"
-        android:textColor="#ff000000" />
+    <!--<Button-->
+        <!--android:id="@+id/btnSubmit"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/Submit"-->
+        <!--android:layout_gravity="center_horizontal|bottom"-->
+        <!--android:textColor="#ff000000" />-->
 
     <Spinner
         android:id="@+id/spinner1"

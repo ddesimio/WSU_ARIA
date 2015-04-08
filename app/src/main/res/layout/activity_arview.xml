@@ -14,6 +14,7 @@
         android:layout_gravity="left"
         android:id="@+id/mPreview" />
 
+    <!--ImageView.locateItems1 for "the bent" label-->
     <ImageView
         android:id="@+id/locateItems1"
         android:layout_width="wrap_content"
@@ -27,6 +28,7 @@
         android:clickable="true"
         android:onClick="getDataFirst"
         />
+
     <ImageView
         android:id="@+id/locateItems2"
         android:layout_width="wrap_content"
@@ -40,6 +42,7 @@
         android:clickable="true"
         android:onClick="getDataSecond"
         />
+
     <ImageView
         android:id="@+id/locateItems3"
         android:layout_width="wrap_content"

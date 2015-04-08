@@ -15,15 +15,23 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import mwdindustries.aria.util.AdvancedLocation;
+import mwdindustries.aria.util.AdvancedLocationService;
 
 
 public class ARView extends Activity implements SurfaceHolder.Callback{
 
     private static final String TAG = "POIActivity CLass";// for debug
+    AdvancedLocationService als;
+    ArrayList<AdvancedLocation> al;
 
     final int NEAR = 0;
     final int MID  = 1;
@@ -55,8 +63,16 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         infoDisplay2 = (TextView)findViewById(R.id.infoWindow2);
         infoDisplay3 = (TextView)findViewById(R.id.infoWindow3);
 
+        //********** TESTING *******************************************************
         //test call - String: image resource name, ImageView: 1 of 3 to set image to
-        getImage("union", locateItem2);
+            moveImageOne(-150,  //topDP - move up 150dp
+                            90, //leftDp - move right 90dp
+                            0,  //scaleX - doesnt matter -> flag is 0 so method is move image
+                            0,  //scaleY - doesnt matter -> flag is 0 so method is move image
+                            0); //flag - use method to move image
+
+            getImage("thebent", locateItem1);
+        //********** TESTING *******************************************************
 
         //force screen orientation to landscape
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -132,6 +148,30 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
                 return true;
             }
         });
+
+        als = new AdvancedLocationService(this);
+        al = new ArrayList<AdvancedLocation>(3);
+
+        al.add(new AdvancedLocation());
+        al.get(0).setShortname("union");
+        al.get(0).setName("Student Union");
+        al.get(0).setLongitude(-84.0649);
+        al.get(0).setLatitude(39.780225);
+        al.get(0).setInformation(this.getResources().getString(R.string.studentUnion));
+
+        al.add(new AdvancedLocation());
+        al.get(1).setShortname("russ");
+        al.get(1).setName("Russ Engineering Center");
+        al.get(1).setLongitude(-84.06324);
+        al.get(1).setLatitude(39.77946);
+        al.get(1).setInformation(this.getResources().getString(R.string.RussEngineering));
+
+        al.add(new AdvancedLocation());
+        al.get(2).setShortname("theBent");
+        al.get(2).setName("The Bent");
+        al.get(2).setLongitude(-84.06340);
+        al.get(2).setLatitude(39.77985);
+        al.get(2).setInformation(this.getResources().getString(R.string.theBent));
 
     }//end onCreate
 
@@ -313,7 +353,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         near.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scope = 0;
+                scope = NEAR;
                 near.setVisibility(View.INVISIBLE);
                 mid.setVisibility(View.INVISIBLE);
                 far.setVisibility(View.INVISIBLE);
@@ -324,7 +364,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         mid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scope = 1;
+                scope = MID;
                 near.setVisibility(View.INVISIBLE);
                 mid.setVisibility(View.INVISIBLE);
                 far.setVisibility(View.INVISIBLE);
@@ -335,7 +375,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         far.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scope = 2;
+                scope = FAR;
                 near.setVisibility(View.INVISIBLE);
                 mid.setVisibility(View.INVISIBLE);
                 far.setVisibility(View.INVISIBLE);
@@ -659,13 +699,186 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         //view.rotate
     }
 
+    /** moveImageOne: allows first imageView (locateItems1) to be moved around the screen, all labels start
+     *                  in the center. Also allows imageView to be moved if flag == 0,
+     *                  scale only if flag == 1, move and scale if flag == 2
+     *
+     *                  -scale starts at 1 (eg half size would be .5)
+     *                  -all images start at screen center
+     *
+     * @param topDP: margin from top, negative to move up, positive to move down
+     * @param leftDP: margin from left, negative to move left, positive to move right
+     * @param scaleX: float to rescale X value
+     * @param scaleY: float to rescale Y value
+     * @param flag: used to determine method action
+     */
+    public void moveImageOne(int topDP, int leftDP, float scaleX, float scaleY, int flag)
+    {
+        ImageView myImage = (ImageView)findViewById(R.id.locateItems1);
+
+        //move image
+        if(flag == 0)
+        {
+            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) myImage.getLayoutParams();
+            lp.setMargins(leftDP, topDP, 0, 0);// (left, top, right, bottom)
+            myImage.setLayoutParams(lp);
+        }
+        //scale image
+        else if(flag == 1)
+        {
+            myImage.setScaleX(scaleX);
+            myImage.setScaleX(scaleY);
+        }
+        //move and scale image
+        else if(flag == 2)
+        {
+            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) myImage.getLayoutParams();
+            lp.setMargins(leftDP, topDP, 0, 0);// (left, top, right, bottom)
+            myImage.setLayoutParams(lp);
+
+            myImage.setScaleX(scaleX);
+            myImage.setScaleX(scaleY);
+        }
+
+    }
+
+    /** moveImageTwo: allows second imageView (locateItems2) to be moved around the screen, all labels start
+     *                  in the center. Also allows imageView to be moved if flag == 0,
+     *                  scale only if flag == 1, move and scale if flag == 2
+     *
+     *                  -scale starts at 1 (eg half size would be .5)
+     *                  -all images start at screen center
+     *
+     * @param topDP: margin from top, negative to move up, positive to move down
+     * @param leftDP: margin from left, negative to move left, positive to move right
+     * @param scaleX: float to rescale X value
+     * @param scaleY: float to rescale Y value
+     * @param flag: used to determine method action
+     */
+    public void moveImageTwo(int topDP, int leftDP, float scaleX, float scaleY, int flag)
+    {
+        ImageView myImage = (ImageView)findViewById(R.id.locateItems2);
+
+        //move image
+        if(flag == 0)
+        {
+            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) myImage.getLayoutParams();
+            lp.setMargins(leftDP, topDP, 0, 0);// (left, top, right, bottom)
+            myImage.setLayoutParams(lp);
+        }
+        //scale image
+        else if(flag == 1)
+        {
+            myImage.setScaleX(scaleX);
+            myImage.setScaleX(scaleY);
+        }
+        //move and scale image
+        else if(flag == 2)
+        {
+            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) myImage.getLayoutParams();
+            lp.setMargins(leftDP, topDP, 0, 0);// (left, top, right, bottom)
+            myImage.setLayoutParams(lp);
+
+            myImage.setScaleX(scaleX);
+            myImage.setScaleX(scaleY);
+        }
+
+    }
+
+    /** moveImageThree: allows third imageView (locateItems3) to be moved around the screen, all labels start
+     *                  in the center. Also allows imageView to be moved if flag == 0,
+     *                  scale only if flag == 1, move and scale if flag == 2
+     *
+     *                  -scale starts at 1 (eg half size would be .5)
+     *                  -all images start at screen center
+     *
+     * @param topDP: margin from top, negative to move up, positive to move down
+     * @param leftDP: margin from left, negative to move left, positive to move right
+     * @param scaleX: float to rescale X value
+     * @param scaleY: float to rescale Y value
+     * @param flag: used to determine method action
+     */
+    public void moveImageThree(int topDP, int leftDP, float scaleX, float scaleY, int flag)
+    {
+        ImageView myImage = (ImageView)findViewById(R.id.locateItems3);
+
+        //move image
+        if(flag == 0)
+        {
+            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) myImage.getLayoutParams();
+            lp.setMargins(leftDP, topDP, 0, 0);// (left, top, right, bottom)
+            myImage.setLayoutParams(lp);
+        }
+        //scale image
+        else if(flag == 1)
+        {
+            myImage.setScaleX(scaleX);
+            myImage.setScaleX(scaleY);
+        }
+        //move and scale image
+        else if(flag == 2)
+        {
+            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) myImage.getLayoutParams();
+            lp.setMargins(leftDP, topDP, 0, 0);// (left, top, right, bottom)
+            myImage.setLayoutParams(lp);
+
+            myImage.setScaleX(scaleX);
+            myImage.setScaleX(scaleY);
+        }
+
+    }
+
+    /** moveTextOne: allows first TextView (infoWindow1) to be moved around the screen, all labels start
+     *                  in the center
+     *
+     * @param topDP: margin from top, negative to move up, positive to move down
+     * @param leftDP: margin from left, negative to move left, positive to move right
+     */
+    public void moveTextOne(int topDP, int leftDP)
+    {
+        TextView myText = (TextView)findViewById(R.id.infoWindow1);
+        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) myText.getLayoutParams();
+        lp.setMargins(leftDP, topDP, 0, 0);// (left, top, right, bottom)
+        myText.setLayoutParams(lp);
+    }
+
+    /** moveTextTwo: allows first TextView (infoWindow2) to be moved around the screen, all labels start
+     *                  in the center
+     *
+     * @param topDP: margin from top, negative to move up, positive to move down
+     * @param leftDP: margin from left, negative to move left, positive to move right
+     */
+    public void moveTextTwo(int topDP, int leftDP)
+    {
+        TextView myText = (TextView)findViewById(R.id.infoWindow2);
+        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) myText.getLayoutParams();
+        lp.setMargins(leftDP, topDP, 0, 0);// (left, top, right, bottom)
+        myText.setLayoutParams(lp);
+    }
+
+    /** moveTextThree: allows third TextView (infoWindow3) to be moved around the screen, all labels start
+     *                  in the center
+     *
+     * @param topDP: margin from top, negative to move up, positive to move down
+     * @param leftDP: margin from left, negative to move left, positive to move right
+     */
+    public void moveTextThree(int topDP, int leftDP)
+    {
+        TextView myText = (TextView)findViewById(R.id.infoWindow3);
+        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) myText.getLayoutParams();
+        lp.setMargins(leftDP, topDP, 0, 0);// (left, top, right, bottom)
+        myText.setLayoutParams(lp);
+    }
+
     /** refresh: when refresh button clicked => manually update location and angle
      *
      * @param view this is what needed to be here for using the 'onclick' from the xml file
      */
     public void refresh(View view)
     {
-        //refresh some things
+        CharSequence cs = "Longitude: "+als.getLongitude()+"\n"
+                +"Latitude: "+als.getLatitude();
+        Toast.makeText(this, cs, Toast.LENGTH_SHORT).show();
     }
 
 }//end main class
