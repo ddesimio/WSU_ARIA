@@ -111,47 +111,78 @@ public class scheduleActivity extends Activity implements AdapterView.OnItemSele
 
     @Override
     public void onBackPressed() {
-        //scheduleActivity.moveTaskToBack(true);
+
+                //clear current list of rooms
+                roomNumberList.clear();
+
+                //clear current list of buildings
+                buildingsList.clear();
+
+                //get room numbers entered
+                String roomOneSelection = roomOne.getText().toString();
+                String roomTwoSelection = roomTwo.getText().toString();
+                String roomThreeSelection = roomThree.getText().toString();
+                String roomFourSelection = roomFour.getText().toString();
+                String roomFiveSelection = roomFive.getText().toString();
+                String roomSixSelection = roomSix.getText().toString();
+
+                //store room numbers in array
+                roomNumberList.add(roomOneSelection);
+                roomNumberList.add(roomTwoSelection);
+                roomNumberList.add(roomThreeSelection);
+                roomNumberList.add(roomFourSelection);
+                roomNumberList.add(roomFiveSelection);
+                roomNumberList.add(roomSixSelection);
+
+                //add spinner values to array
+                buildingsList.add(String.valueOf(spinner1.getSelectedItem()));
+                buildingsList.add(String.valueOf(spinner2.getSelectedItem()));
+                buildingsList.add(String.valueOf(spinner3.getSelectedItem()));
+                buildingsList.add(String.valueOf(spinner4.getSelectedItem()));
+                buildingsList.add(String.valueOf(spinner5.getSelectedItem()));
+                buildingsList.add(String.valueOf(spinner6.getSelectedItem()));
+        
+//            this.moveTaskToBack(false);
     }
 
-    //save activity state
-    @Override
-    protected void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-
-        savedInstanceState.putString("room1", roomOne.getText().toString());
-        savedInstanceState.putString("room2", roomTwo.getText().toString());
-        savedInstanceState.putString("room3", roomThree.getText().toString());
-        savedInstanceState.putString("room4", roomFour.getText().toString());
-        savedInstanceState.putString("room5", roomFive.getText().toString());
-        savedInstanceState.putString("room6", roomSix.getText().toString());
-
-        savedInstanceState.putInt("building1", spinner1.getSelectedItemPosition());
-        savedInstanceState.putInt("building2", spinner2.getSelectedItemPosition());
-        savedInstanceState.putInt("building3", spinner3.getSelectedItemPosition());
-        savedInstanceState.putInt("building4", spinner4.getSelectedItemPosition());
-        savedInstanceState.putInt("building5", spinner5.getSelectedItemPosition());
-        savedInstanceState.putInt("building6", spinner6.getSelectedItemPosition());
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        roomOne.setText(savedInstanceState.getString("room1"));
-        roomTwo.setText(savedInstanceState.getString("room2"));
-        roomThree.setText(savedInstanceState.getString("room3"));
-        roomFour.setText(savedInstanceState.getString("room4"));
-        roomFive.setText(savedInstanceState.getString("room5"));
-        roomSix.setText(savedInstanceState.getString("room6"));
-
-        spinner1.setSelection(savedInstanceState.getInt("building1"));
-        spinner2.setSelection(savedInstanceState.getInt("building2"));
-        spinner3.setSelection(savedInstanceState.getInt("building3"));
-        spinner4.setSelection(savedInstanceState.getInt("building4"));
-        spinner5.setSelection(savedInstanceState.getInt("building5"));
-        spinner6.setSelection(savedInstanceState.getInt("building6"));
-    }
+//    //save activity state
+//    @Override
+//    protected void onSaveInstanceState(Bundle savedInstanceState) {
+//        super.onSaveInstanceState(savedInstanceState);
+//
+//        savedInstanceState.putString("room1", roomOne.getText().toString());
+//        savedInstanceState.putString("room2", roomTwo.getText().toString());
+//        savedInstanceState.putString("room3", roomThree.getText().toString());
+//        savedInstanceState.putString("room4", roomFour.getText().toString());
+//        savedInstanceState.putString("room5", roomFive.getText().toString());
+//        savedInstanceState.putString("room6", roomSix.getText().toString());
+//
+//        savedInstanceState.putInt("building1", spinner1.getSelectedItemPosition());
+//        savedInstanceState.putInt("building2", spinner2.getSelectedItemPosition());
+//        savedInstanceState.putInt("building3", spinner3.getSelectedItemPosition());
+//        savedInstanceState.putInt("building4", spinner4.getSelectedItemPosition());
+//        savedInstanceState.putInt("building5", spinner5.getSelectedItemPosition());
+//        savedInstanceState.putInt("building6", spinner6.getSelectedItemPosition());
+//    }
+//
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//
+//        roomOne.setText(savedInstanceState.getString("room1"));
+//        roomTwo.setText(savedInstanceState.getString("room2"));
+//        roomThree.setText(savedInstanceState.getString("room3"));
+//        roomFour.setText(savedInstanceState.getString("room4"));
+//        roomFive.setText(savedInstanceState.getString("room5"));
+//        roomSix.setText(savedInstanceState.getString("room6"));
+//
+//        spinner1.setSelection(savedInstanceState.getInt("building1"));
+//        spinner2.setSelection(savedInstanceState.getInt("building2"));
+//        spinner3.setSelection(savedInstanceState.getInt("building3"));
+//        spinner4.setSelection(savedInstanceState.getInt("building4"));
+//        spinner5.setSelection(savedInstanceState.getInt("building5"));
+//        spinner6.setSelection(savedInstanceState.getInt("building6"));
+//    }
 
     @Override
     protected void onStop() {
@@ -222,7 +253,7 @@ public class scheduleActivity extends Activity implements AdapterView.OnItemSele
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Toast.makeText(parent.getContext(),
                     "OnItemSelectedListener : " + parent.getItemAtPosition(position).toString(),
-                    Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_SHORT);
 
         }
 

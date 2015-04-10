@@ -4,12 +4,17 @@ import android.location.Location;
 import android.location.LocationManager;
 
 public class AdvancedLocation {
+    public static enum BuildingScope {NEAR, MID, FAR};
+
     public AdvancedLocation() {
         l = new Location(LocationManager.GPS_PROVIDER);
         name = "";
         shortname = "";
         information = "";
+        buildingDistance = 300;
+        scope = BuildingScope.MID;
     }
+
     public Location getLocation() {
         return l;
     }
@@ -46,16 +51,28 @@ public class AdvancedLocation {
         this.information = information;
     }
 
-    public float distanceTo(AdvancedLocation dest){
-        return l.distanceTo(dest.getLocation());
+    public double getBuildingDistance() {
+        return buildingDistance;
     }
+
+    public void setBuildingDistance(double buildingDistance) { this.buildingDistance = buildingDistance; }
+
+    public float distanceTo(AdvancedLocation dest){ return l.distanceTo(dest.getLocation()); }
 
     public float bearingTo(AdvancedLocation dest){
         return l.bearingTo(dest.getLocation());
+    }
+
+    public float distanceTo(Location dest){ return l.distanceTo(dest); }
+
+    public float bearingTo(Location dest){
+        return l.bearingTo(dest);
     }
 
     private Location l;
     private String name;
     private String shortname;
     private String information;
+    private double buildingDistance;
+    private BuildingScope scope;
 }

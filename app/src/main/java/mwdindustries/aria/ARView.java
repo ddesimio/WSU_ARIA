@@ -157,6 +157,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         al.get(0).setName("Student Union");
         al.get(0).setLongitude(-84.0649);
         al.get(0).setLatitude(39.780225);
+        al.get(0).setBuildingDistance(300);
         al.get(0).setInformation(this.getResources().getString(R.string.studentUnion));
 
         al.add(new AdvancedLocation());
@@ -164,6 +165,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         al.get(1).setName("Russ Engineering Center");
         al.get(1).setLongitude(-84.06324);
         al.get(1).setLatitude(39.77946);
+        al.get(1).setBuildingDistance(300);
         al.get(1).setInformation(this.getResources().getString(R.string.RussEngineering));
 
         al.add(new AdvancedLocation());
@@ -171,6 +173,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         al.get(2).setName("The Bent");
         al.get(2).setLongitude(-84.06340);
         al.get(2).setLatitude(39.77985);
+        al.get(2).setBuildingDistance(30);
         al.get(2).setInformation(this.getResources().getString(R.string.theBent));
 
     }//end onCreate
@@ -876,11 +879,19 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
      */
     public void refresh(View view)
     {
-        CharSequence cs = "Longitude: "+als.getLongitude()+"\n"
-                +"Latitude: "+als.getLatitude();
-        Toast.makeText(this, cs, Toast.LENGTH_SHORT).show();
+//        float f1 = als.distanceTo(al.get(0));
+//        float f2 = als.bearingTo(al.get(0));
+//        CharSequence cs = "Distance to " + al.get(0).getName() + ": " + Float.toString(f1) + "\nBearing to " + al.get(0).getName() + ": " + Float.toString(f2);
+//        Toast.makeText(this, cs, Toast.LENGTH_SHORT).show();
     }
 
+    public int isInScopeAndRange(AdvancedLocation al) {
+        int returnVal = View.INVISIBLE;
+        if(als.distanceTo(al) <= al.getBuildingDistance())
+            if(Math.abs(als.bearingTo(al)) <= 30)
+                returnVal = View.VISIBLE;
+        return returnVal;
+    }
 }//end main class
 
 

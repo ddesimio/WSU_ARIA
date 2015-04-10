@@ -13,6 +13,8 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import mwdindustries.aria.ARView;
+
 /**
  * Created by Phil on 3/19/2015.
  */
@@ -125,8 +127,25 @@ public class AdvancedLocationService extends Service implements LocationListener
      * Accessor for the orientation vector for the phone
      * @return float array of size 3
      */
-    public float[] getOrientation() {
-        return orientation;
+    public float getOrientation() {
+        return orientation[0];
+    }
+
+    private final float ORIENTATION_OFFSET = 180f/(float)Math.PI;
+    public float bearingTo(AdvancedLocation location){
+        return (ORIENTATION_OFFSET * this.getOrientation()) + bearingTo(location.getLocation());
+    }
+
+    public float bearingTo(Location location){
+        return mLocation.bearingTo(location);
+    }
+
+    public float distanceTo(AdvancedLocation location){
+        return distanceTo(location.getLocation());
+    }
+
+    public float distanceTo(Location location){
+        return mLocation.distanceTo(location);
     }
 
     /**
@@ -170,7 +189,7 @@ public class AdvancedLocationService extends Service implements LocationListener
         if(mAccel != null && mMagnet != null){
             float R[] = new float[9];
             float I[] = new float[9];
-            if(SensorManager.getRotationMatrix(R, I, mAccel, mMagnet)){
+            if(SensorManager.getRotationMatrix(R, null, mAccel, mMagnet)){
                 orientation = SensorManager.getOrientation(R, orientation);
             }
         }
