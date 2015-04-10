@@ -64,7 +64,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         infoDisplay3 = (TextView)findViewById(R.id.infoWindow3);
 
         //********** TESTING *******************************************************
-        //test call - String: image resource name, ImageView: 1 of 3 to set image to
+        //also an example of how to move and show a label
             moveImageOne(-150,  //topDP - move up 150dp
                             90, //leftDp - move right 90dp
                             0,  //scaleX - doesnt matter -> flag is 0 so method is move image
@@ -727,7 +727,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         else if(flag == 1)
         {
             myImage.setScaleX(scaleX);
-            myImage.setScaleX(scaleY);
+            myImage.setScaleY(scaleY);
         }
         //move and scale image
         else if(flag == 2)
@@ -737,7 +737,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
             myImage.setLayoutParams(lp);
 
             myImage.setScaleX(scaleX);
-            myImage.setScaleX(scaleY);
+            myImage.setScaleY(scaleY);
         }
 
     }
@@ -770,7 +770,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         else if(flag == 1)
         {
             myImage.setScaleX(scaleX);
-            myImage.setScaleX(scaleY);
+            myImage.setScaleY(scaleY);
         }
         //move and scale image
         else if(flag == 2)
@@ -780,7 +780,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
             myImage.setLayoutParams(lp);
 
             myImage.setScaleX(scaleX);
-            myImage.setScaleX(scaleY);
+            myImage.setScaleY(scaleY);
         }
 
     }
@@ -813,7 +813,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         else if(flag == 1)
         {
             myImage.setScaleX(scaleX);
-            myImage.setScaleX(scaleY);
+            myImage.setScaleY(scaleY);
         }
         //move and scale image
         else if(flag == 2)
@@ -823,7 +823,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
             myImage.setLayoutParams(lp);
 
             myImage.setScaleX(scaleX);
-            myImage.setScaleX(scaleY);
+            myImage.setScaleY(scaleY);
         }
 
     }
