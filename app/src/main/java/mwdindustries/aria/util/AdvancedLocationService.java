@@ -127,14 +127,14 @@ public class AdvancedLocationService extends Service implements LocationListener
 
     /**
      * Accessor for the orientation vector for the phone
-     * @return float array of size 3
+     * @return float for the rotation of the phone facing east
      */
     public float getOrientation() {
-        return orientation[0];
+        return orientation[0] + (float)Math.toRadians(90);
     }
 
     public float bearingTo(AdvancedLocation location){
-        return (float)Math.toDegrees(this.getOrientation()) + bearingTo(location.getLocation());
+        return bearingTo(location.getLocation()) - (float)Math.toDegrees(this.getOrientation());
     }
 
     public float bearingTo(Location location){
@@ -147,6 +147,13 @@ public class AdvancedLocationService extends Service implements LocationListener
 
     public float distanceTo(Location location){
         return mLocation.distanceTo(location);
+    }
+
+    public float magneticNorth() {
+        Location l = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        l.setLongitude(0);
+        l.setLatitude(0);
+        return mLocation.bearingTo(l);
     }
 
     /**
@@ -204,8 +211,8 @@ public class AdvancedLocationService extends Service implements LocationListener
             lat += mLocation.getLongitude();
             lon += mLocation.getLatitude();
         }
-        latitudeOffset = lat / 30d;
-        longitudeOffset = lon / 30d;
+        latitudeOffset = (lat / 30d) - 39.779752d;
+        longitudeOffset = (lon / 30d) + 84.063405d;
     }
 
     public double getAccuracy() {

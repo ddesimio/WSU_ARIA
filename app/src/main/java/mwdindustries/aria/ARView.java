@@ -189,8 +189,8 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         al.add(new AdvancedLocation());
         al.get(2).setShortname("theBent");
         al.get(2).setName("The Bent");
-        al.get(2).setLongitude(-84.0640066); //-84.063405
-        al.get(2).setLatitude(39.7801634); //39.779752
+        al.get(2).setLongitude(-84.063405); //-84.0640066
+        al.get(2).setLatitude(39.779752); //39.7801634
         al.get(2).setBuildingDistance(30);
         al.get(2).setInformation(this.getResources().getString(R.string.theBent));
 
@@ -822,7 +822,9 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
     public void refresh(View view) {
         Toast.makeText(this,
                 "GPS accuracy: " + als.getAccuracy()
-                + "Phone Location: " + als.getLatitude() + COMMA + als.getLongitude()
+                + "\nPhone Location: " + als.getLatitude() + COMMA + als.getLongitude()
+                + "\nPhone Orientation: " + als.getOrientation()
+                + "\nTo Magnetic North: " + als.magneticNorth()
                 + "\nAngle to " + al.get(0).getName() + ": " + als.bearingTo(al.get(0))
                 + "\nAngle to " + al.get(1).getName() + ": " + als.bearingTo(al.get(1))
                 + "\nAngle to " + al.get(2).getName() + ": " + als.bearingTo(al.get(2)),
@@ -830,7 +832,6 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
         for(int i=0; i<3; i++) {
             if(isInScopeAndRange(al.get(i))) {
-                Toast.makeText(this, al.get(i).getName(), Toast.LENGTH_SHORT).show();
                 //TODO set its horizontal location on the screen
                 //To set horizontal location, we need to use the bearingTo()
                 // screen width / 2 is center of screen     WIDTH_DP/2
@@ -863,6 +864,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
     public void calibrate(View view)
     {
         als.calibrate();
+        Toast.makeText(this, "Calibration Complete!", Toast.LENGTH_SHORT).show();
     }
 }//end main class
 
