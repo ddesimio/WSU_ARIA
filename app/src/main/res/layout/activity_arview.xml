@@ -171,6 +171,21 @@
         android:textColor="#ff0cfff6">
     </Button>
 
+    <ImageButton
+        android:id="@+id/calibrate"
+        android:src="@drawable/compass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="calibrate"
+        android:layout_gravity="top|right"
+        android:layout_marginRight="-1dp"
+        android:layout_marginTop="36dp"
+        android:visibility="invisible"
+        android:textColor="#ff0cfff6"
+        android:scaleX=".25"
+        android:scaleY=".25"
+        />
+
     <TextView
         android:id="@+id/infoWindow1"
         android:layout_width="136dp"

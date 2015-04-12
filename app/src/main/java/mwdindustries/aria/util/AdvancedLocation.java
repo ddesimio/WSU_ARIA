@@ -15,9 +15,7 @@ public class AdvancedLocation {
         scope = BuildingScope.MID;
     }
 
-    public Location getLocation() {
-        return l;
-    }
+    public Location getLocation() { return l; }
 
     public void setLocation(Location l) {
         this.l = l;

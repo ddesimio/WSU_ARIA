@@ -19,10 +19,12 @@ import mwdindustries.aria.ARView;
  * Created by Phil on 3/19/2015.
  */
 public class AdvancedLocationService extends Service implements LocationListener, SensorEventListener{
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 5; // every 5 meters will automatically trigger an update
-    private static final long MIN_TIME_BETWEEN_UPDATES = 750; // every 750 milliseconds will trigger an update
-    private static final long MIN_TIME_BETWEEN_HIDDEN_UPDATES = 1500; // every 1.5 seconds will trigger an update
+    private final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 5; // every 5 meters will automatically trigger an update
+    private final long MIN_TIME_BETWEEN_UPDATES = 750; // every 750 milliseconds will trigger an update
+    private final long MIN_TIME_BETWEEN_HIDDEN_UPDATES = 1500; // every 1.5 seconds will trigger an update
 
+    private double latitudeOffset = 0;
+    private double longitudeOffset = 0;
     private LocationManager mLocationManager;
     private Location mLocation;
     private double latitude = 181;
@@ -131,9 +133,8 @@ public class AdvancedLocationService extends Service implements LocationListener
         return orientation[0];
     }
 
-    private final float ORIENTATION_OFFSET = 180f/(float)Math.PI;
     public float bearingTo(AdvancedLocation location){
-        return (ORIENTATION_OFFSET * this.getOrientation()) + bearingTo(location.getLocation());
+        return (float)Math.toDegrees(this.getOrientation()) + bearingTo(location.getLocation());
     }
 
     public float bearingTo(Location location){
@@ -158,8 +159,8 @@ public class AdvancedLocationService extends Service implements LocationListener
     @Override
     public void onLocationChanged(Location location) {
         mLocation = location;
-        latitude = mLocation.getLatitude();
-        longitude = mLocation.getLongitude();
+        latitude = mLocation.getLatitude() + latitudeOffset;
+        longitude = mLocation.getLongitude() + longitudeOffset;
     }
 
     private float[] mAccel;
@@ -188,13 +189,28 @@ public class AdvancedLocationService extends Service implements LocationListener
         }
         if(mAccel != null && mMagnet != null){
             float R[] = new float[9];
-            float I[] = new float[9];
             if(SensorManager.getRotationMatrix(R, null, mAccel, mMagnet)){
                 orientation = SensorManager.getOrientation(R, orientation);
             }
         }
     }
 
+    /**
+     * Calibration method based on the assumption that all coordinates are correct relative to each other
+     */
+    public void calibrate() {
+        double lat = 0, lon = 0;
+        for(int i=0; i<30; i++){
+            lat += mLocation.getLongitude();
+            lon += mLocation.getLatitude();
+        }
+        latitudeOffset = lat / 30d;
+        longitudeOffset = lon / 30d;
+    }
+
+    public double getAccuracy() {
+        return mLocation.getAccuracy();
+    }
     // ignored listener events
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {}
