@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.text.BoringLayout;
@@ -38,6 +39,7 @@ import static android.text.BoringLayout.*;
 public class ARView extends Activity implements SurfaceHolder.Callback{
 
     float WIDTH_DP; // width of the screen in dp
+    float DENSITY; // number of pixels per dp
 
     private static final String TAG = "POIActivity CLass";// for debug
     AdvancedLocationService als;
@@ -67,8 +69,9 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 
         DisplayMetrics outMetrics=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
+        DENSITY = outMetrics.density;
 
-        WIDTH_DP = outMetrics.widthPixels / outMetrics.density;
+        WIDTH_DP = outMetrics.widthPixels / DENSITY;
 
         //set imageViews
         locateItem1 = (ImageView)findViewById(R.id.locateItems1);
@@ -81,15 +84,15 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         infoDisplay3 = (TextView)findViewById(R.id.infoWindow3);
 
         //********** TESTING *******************************************************
-        //also an example of how to move and show a label
-            moveImage(-150,  //topDP - move up 150dp
-                            90, //leftDp - move right 90dp
-                            0,  //scaleX - doesnt matter -> flag is 0 so method is move image
-                            0,  //scaleY - doesnt matter -> flag is 0 so method is move image
-                            0, //flag - use method to move image
-                            locateItem1);//which imageview
-
-            getImage("thebent", locateItem1);
+//        //also an example of how to move and show a label
+//            moveImage(-150,  //topDP - move up 150dp
+//                            90, //leftDp - move right 90dp
+//                            0,  //scaleX - doesnt matter -> flag is 0 so method is move image
+//                            0,  //scaleY - doesnt matter -> flag is 0 so method is move image
+//                            0, //flag - use method to move image
+//                            locateItem1);//which imageview
+//
+//            getImage("thebent", locateItem1);
         //********** TESTING *******************************************************
 
         //force screen orientation to landscape
@@ -814,51 +817,81 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         myText.setLayoutParams(lp);
     }
 
-    private final String COMMA = ", ";
+    private final double DP_PER_DEG = 215d/30d;
     /** refresh: when refresh button clicked => manually update location and angle
      *
      * @param view this is what needed to be here for using the 'onclick' from the xml file
      */
     public void refresh(View view) {
-        Toast.makeText(this,
-                "GPS accuracy: " + als.getAccuracy()
-                + "\nPhone Location: " + als.getLatitude() + COMMA + als.getLongitude()
-                + "\nPhone Orientation: " + als.getOrientation()
-                + "\nTo Magnetic North: " + als.magneticNorth()
-                + "\nAngle to " + al.get(0).getName() + ": " + als.bearingTo(al.get(0))
-                + "\nAngle to " + al.get(1).getName() + ": " + als.bearingTo(al.get(1))
-                + "\nAngle to " + al.get(2).getName() + ": " + als.bearingTo(al.get(2)),
-                Toast.LENGTH_SHORT).show();
+
+        boolean onScreenOne = false;
+        boolean onScreenTwo = false;
+        boolean onScreenThree = false;
 
         for(int i=0; i<3; i++) {
             if(isInScopeAndRange(al.get(i))) {
-                //TODO set its horizontal location on the screen
-                //To set horizontal location, we need to use the bearingTo()
-                // screen width / 2 is center of screen     WIDTH_DP/2
-                // image width / 2 is center of image
-
                 if(getResources().getResourceName(R.drawable.thebent).contains(al.get(i).getShortname())) {
-                    //TODO al.get(i) is the bent
+                    auxImageMethod(R.drawable.thebent, locateItem1, i);
+                    onScreenOne = true;
                 } else if(getResources().getResourceName(R.drawable.union).contains(al.get(i).getShortname())) {
-                    //TODO al.get(i) is the student union
+                    auxImageMethod(R.drawable.union, locateItem2, i);
+                    onScreenTwo = true;
                 } else if(getResources().getResourceName(R.drawable.russ).contains(al.get(i).getShortname())) {
-                    //TODO al.get(i) is the russ engineering
+                    auxImageMethod(R.drawable.russ, locateItem3, i);
+                    onScreenTwo = true;
                 }
-
-                // therefore image width/2
-                //TODO mark it visible
             } else {
-                //TODO mark it as invisible
+                if(!onScreenOne){
+                    locateItem1.setVisibility(View.INVISIBLE);
+                }
+                if(!onScreenTwo){
+                    locateItem2.setVisibility(View.INVISIBLE);
+                }
+                if(!onScreenThree){
+                    locateItem3.setVisibility(View.INVISIBLE);
+                }
             }
         }
     }
 
-    public boolean isInScopeAndRange(AdvancedLocation al) {
+    private void auxImageMethod(int imageID, ImageView iv, int locationIndex) {
+        float imageWidth = getImageWidth_DP(imageID);        // the width of the image
+        int ILx = (int)((imageWidth/-2f) + als.bearingTo(al.get(locationIndex)) * (float)DP_PER_DEG);
+        int ILy = -150;
+        if(ILx < WIDTH_DP/-2f) {
+            ILx = (int)(WIDTH_DP/-2f);
+        } else if(ILx > WIDTH_DP/2f - imageWidth) {
+            ILx = (int)(WIDTH_DP/2f - imageWidth);
+        }
+        moveImage(ILy, ILx, 0f, 0f, 0, iv);
+        getImage(al.get(locationIndex).getShortname(),iv);
+        iv.setVisibility(View.VISIBLE);
+
+//        Toast.makeText(this,
+//                "image width = " + imageWidth
+//                        + "\nscreen width = " + WIDTH_DP
+//                        + "\nILx = " + ILx
+//                        + "\nILy = " + ILy,
+//                Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean isInScopeAndRange(AdvancedLocation al) {
         boolean returnVal = false;
         if(als.distanceTo(al) <= al.getBuildingDistance())
             if(Math.abs(als.bearingTo(al)) <= 30)
                 returnVal = true;
         return returnVal;
+    }
+
+    /**
+     * Get the width of the image in density pixels.
+     * @param imageID   The id of the drawable, i.e. R.drawable.thebent
+     * @return  the width of the image in DP
+     */
+    private float getImageWidth_DP(int imageID) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
+                                        (getResources().getDrawable(imageID)).getIntrinsicWidth(),
+                                        getResources().getDisplayMetrics()) / DENSITY;
     }
 
     public void calibrate(View view)

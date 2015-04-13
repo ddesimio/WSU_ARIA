@@ -134,7 +134,7 @@ public class AdvancedLocationService extends Service implements LocationListener
     }
 
     public float bearingTo(AdvancedLocation location){
-        return bearingTo(location.getLocation()) - (float)Math.toDegrees(this.getOrientation());
+        return (bearingTo(location.getLocation()) - (float)Math.toDegrees(this.getOrientation()))%360;
     }
 
     public float bearingTo(Location location){
