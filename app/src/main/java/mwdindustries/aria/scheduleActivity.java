@@ -109,41 +109,41 @@ public class scheduleActivity extends Activity implements AdapterView.OnItemSele
 
     } //end onCreate
 
-    @Override
-    public void onBackPressed() {
-
-                //clear current list of rooms
-                roomNumberList.clear();
-
-                //clear current list of buildings
-                buildingsList.clear();
-
-                //get room numbers entered
-                String roomOneSelection = roomOne.getText().toString();
-                String roomTwoSelection = roomTwo.getText().toString();
-                String roomThreeSelection = roomThree.getText().toString();
-                String roomFourSelection = roomFour.getText().toString();
-                String roomFiveSelection = roomFive.getText().toString();
-                String roomSixSelection = roomSix.getText().toString();
-
-                //store room numbers in array
-                roomNumberList.add(roomOneSelection);
-                roomNumberList.add(roomTwoSelection);
-                roomNumberList.add(roomThreeSelection);
-                roomNumberList.add(roomFourSelection);
-                roomNumberList.add(roomFiveSelection);
-                roomNumberList.add(roomSixSelection);
-
-                //add spinner values to array
-                buildingsList.add(String.valueOf(spinner1.getSelectedItem()));
-                buildingsList.add(String.valueOf(spinner2.getSelectedItem()));
-                buildingsList.add(String.valueOf(spinner3.getSelectedItem()));
-                buildingsList.add(String.valueOf(spinner4.getSelectedItem()));
-                buildingsList.add(String.valueOf(spinner5.getSelectedItem()));
-                buildingsList.add(String.valueOf(spinner6.getSelectedItem()));
-        
-//            this.moveTaskToBack(false);
-    }
+//    @Override
+//    public void onBackPressed() {
+//
+//                //clear current list of rooms
+//                roomNumberList.clear();
+//
+//                //clear current list of buildings
+//                buildingsList.clear();
+//
+//                //get room numbers entered
+//                String roomOneSelection = roomOne.getText().toString();
+//                String roomTwoSelection = roomTwo.getText().toString();
+//                String roomThreeSelection = roomThree.getText().toString();
+//                String roomFourSelection = roomFour.getText().toString();
+//                String roomFiveSelection = roomFive.getText().toString();
+//                String roomSixSelection = roomSix.getText().toString();
+//
+//                //store room numbers in array
+//                roomNumberList.add(roomOneSelection);
+//                roomNumberList.add(roomTwoSelection);
+//                roomNumberList.add(roomThreeSelection);
+//                roomNumberList.add(roomFourSelection);
+//                roomNumberList.add(roomFiveSelection);
+//                roomNumberList.add(roomSixSelection);
+//
+//                //add spinner values to array
+//                buildingsList.add(String.valueOf(spinner1.getSelectedItem()));
+//                buildingsList.add(String.valueOf(spinner2.getSelectedItem()));
+//                buildingsList.add(String.valueOf(spinner3.getSelectedItem()));
+//                buildingsList.add(String.valueOf(spinner4.getSelectedItem()));
+//                buildingsList.add(String.valueOf(spinner5.getSelectedItem()));
+//                buildingsList.add(String.valueOf(spinner6.getSelectedItem()));
+//
+////            this.moveTaskToBack(false);
+//    }
 
 //    //save activity state
 //    @Override

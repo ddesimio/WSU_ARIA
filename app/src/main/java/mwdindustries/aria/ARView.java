@@ -93,6 +93,9 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
 //                            locateItem1);//which imageview
 //
 //            getImage("thebent", locateItem1);
+
+
+
         //********** TESTING *******************************************************
 
         //force screen orientation to landscape
@@ -384,6 +387,8 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
                 near.setVisibility(View.INVISIBLE);
                 mid.setVisibility(View.INVISIBLE);
                 far.setVisibility(View.INVISIBLE);
+                CharSequence scope = "Scope: Near";
+                Toast.makeText(ARView.this, scope, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -395,6 +400,8 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
                 near.setVisibility(View.INVISIBLE);
                 mid.setVisibility(View.INVISIBLE);
                 far.setVisibility(View.INVISIBLE);
+                CharSequence scope = "Scope: Mid";
+                Toast.makeText(ARView.this, scope, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -406,6 +413,8 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
                 near.setVisibility(View.INVISIBLE);
                 mid.setVisibility(View.INVISIBLE);
                 far.setVisibility(View.INVISIBLE);
+                CharSequence scope = "Scope: Far";
+                Toast.makeText(ARView.this, scope, Toast.LENGTH_SHORT).show();
             }
         });
 

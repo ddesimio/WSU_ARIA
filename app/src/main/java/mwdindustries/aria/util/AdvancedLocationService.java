@@ -12,6 +12,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 
 import mwdindustries.aria.ARView;
 
