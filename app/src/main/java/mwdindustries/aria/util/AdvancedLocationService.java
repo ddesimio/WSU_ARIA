@@ -57,7 +57,14 @@ public class AdvancedLocationService extends Service implements LocationListener
                             MIN_TIME_BETWEEN_UPDATES,
                             MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                     if(mLocationManager != null){
-                        mLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        do {
+                            mLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        }while(mLocation == null);
+//                        if (mLocationManager.getAllProviders().indexOf(LocationManager.GPS_PROVIDER) >= 0) {
+//                            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+//                        } else {
+//                            Log.w("MainActivity", "No GPS location provider found. Location data will not be available.");
+//                        }
                         if(mLocation != null){
                             latitude = mLocation.getLatitude();
                             longitude = mLocation.getLongitude();
@@ -69,7 +76,14 @@ public class AdvancedLocationService extends Service implements LocationListener
                             MIN_TIME_BETWEEN_HIDDEN_UPDATES,
                             MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                     if(mLocationManager != null){
-                        mLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        do{
+                            mLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        }while(mLocation == null);
+//                        if (mLocationManager.getAllProviders().indexOf(LocationManager.GPS_PROVIDER) >= 0) {
+//                            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+//                        } else {
+//                            Log.w("MainActivity", "No GPS location provider found. Location data will not be available.");
+//                        }
                         if(mLocation != null){
                             latitude = mLocation.getLatitude();
                             longitude = mLocation.getLongitude();

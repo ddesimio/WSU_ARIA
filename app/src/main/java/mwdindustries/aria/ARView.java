@@ -1,6 +1,7 @@
 package mwdindustries.aria;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
@@ -38,8 +39,11 @@ import static android.text.BoringLayout.*;
 
 public class ARView extends Activity implements SurfaceHolder.Callback{
 
-    float WIDTH_DP; // width of the screen in dp
-    float DENSITY; // number of pixels per dp
+    private float WIDTH_DP; // width of the screen in dp
+    private float DENSITY; // number of pixels per dp
+    private float WIDTH_PX; // width of screen in px
+    private float PX_PER_DEG; // pixels per degree rotation
+    private float DP_PER_DEG; // dp per degree rotation
 
     private static final String TAG = "POIActivity CLass";// for debug
     AdvancedLocationService als;
@@ -65,13 +69,17 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_arview);
 
-
-
         DisplayMetrics outMetrics=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
         DENSITY = outMetrics.density;
 
-        WIDTH_DP = outMetrics.widthPixels / DENSITY;
+        WIDTH_PX = outMetrics.widthPixels;
+
+        WIDTH_DP = WIDTH_PX / DENSITY;
+
+        PX_PER_DEG = WIDTH_PX/60;
+
+        DP_PER_DEG = WIDTH_DP/60;
 
         //set imageViews
         locateItem1 = (ImageView)findViewById(R.id.locateItems1);
@@ -197,7 +205,7 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         al.get(2).setName("The Bent");
         al.get(2).setLongitude(-84.063405); //-84.0640066
         al.get(2).setLatitude(39.779752); //39.7801634
-        al.get(2).setBuildingDistance(30);
+        al.get(2).setBuildingDistance(300);
         al.get(2).setInformation(this.getResources().getString(R.string.theBent));
 
     }//end onCreate
@@ -826,62 +834,65 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
         myText.setLayoutParams(lp);
     }
 
-    private final double DP_PER_DEG = 215d/30d;
     /** refresh: when refresh button clicked => manually update location and angle
      *
      * @param view this is what needed to be here for using the 'onclick' from the xml file
      */
     public void refresh(View view) {
+        try {
+            boolean onScreenOne = false;
+            boolean onScreenTwo = false;
+            boolean onScreenThree = false;
 
-        boolean onScreenOne = false;
-        boolean onScreenTwo = false;
-        boolean onScreenThree = false;
-
-        for(int i=0; i<3; i++) {
-            if(isInScopeAndRange(al.get(i))) {
-                if(getResources().getResourceName(R.drawable.thebent).contains(al.get(i).getShortname())) {
-                    auxImageMethod(R.drawable.thebent, locateItem1, i);
-                    onScreenOne = true;
-                } else if(getResources().getResourceName(R.drawable.union).contains(al.get(i).getShortname())) {
-                    auxImageMethod(R.drawable.union, locateItem2, i);
-                    onScreenTwo = true;
-                } else if(getResources().getResourceName(R.drawable.russ).contains(al.get(i).getShortname())) {
-                    auxImageMethod(R.drawable.russ, locateItem3, i);
-                    onScreenTwo = true;
-                }
-            } else {
-                if(!onScreenOne){
-                    locateItem1.setVisibility(View.INVISIBLE);
-                }
-                if(!onScreenTwo){
-                    locateItem2.setVisibility(View.INVISIBLE);
-                }
-                if(!onScreenThree){
-                    locateItem3.setVisibility(View.INVISIBLE);
+            for (int i = 0; i < 3; i++) {
+                if (isInScopeAndRange(al.get(i))) {
+                    if (getResources().getResourceName(R.drawable.thebent).contains(al.get(i).getShortname())) {
+                        auxImageMethod(R.drawable.thebent, locateItem1, i);
+                        onScreenOne = true;
+                    } else if (getResources().getResourceName(R.drawable.union).contains(al.get(i).getShortname())) {
+                        auxImageMethod(R.drawable.union, locateItem2, i);
+                        onScreenTwo = true;
+                    } else if (getResources().getResourceName(R.drawable.russ).contains(al.get(i).getShortname())) {
+                        auxImageMethod(R.drawable.russ, locateItem3, i);
+                        onScreenTwo = true;
+                    }
+                } else {
+                    if (!onScreenOne) {
+                        locateItem1.setVisibility(View.INVISIBLE);
+                    }
+                    if (!onScreenTwo) {
+                        locateItem2.setVisibility(View.INVISIBLE);
+                    }
+                    if (!onScreenThree) {
+                        locateItem3.setVisibility(View.INVISIBLE);
+                    }
                 }
             }
+        } catch (Exception e){
+            Log.e("refresh error", "error in refresh method", e.getCause());
         }
     }
 
     private void auxImageMethod(int imageID, ImageView iv, int locationIndex) {
         float imageWidth = getImageWidth_DP(imageID);        // the width of the image
-        int ILx = (int)((imageWidth/-2f) + als.bearingTo(al.get(locationIndex)) * (float)DP_PER_DEG);
-        int ILy = -150;
-        if(ILx < WIDTH_DP/-2f) {
-            ILx = (int)(WIDTH_DP/-2f);
-        } else if(ILx > WIDTH_DP/2f - imageWidth) {
-            ILx = (int)(WIDTH_DP/2f - imageWidth);
-        }
-        moveImage(ILy, ILx, 0f, 0f, 0, iv);
-        getImage(al.get(locationIndex).getShortname(),iv);
-        iv.setVisibility(View.VISIBLE);
-
+        float temp = als.bearingTo(al.get(locationIndex));
+//        int ILx = ((int)als.bearingTo(al.get(locationIndex)) + 30) * (int)DP_PER_DEG;
+        double ILx = ((double)temp + 30) * PX_PER_DEG;
+        double ILy = 0;
 //        Toast.makeText(this,
-//                "image width = " + imageWidth
-//                        + "\nscreen width = " + WIDTH_DP
+//                "bearing = " + temp
 //                        + "\nILx = " + ILx
 //                        + "\nILy = " + ILy,
 //                Toast.LENGTH_SHORT).show();
+//        if(ILx < 0) {
+//            ILx = 0;
+//        } else if(ILx%WIDTH_DP > WIDTH_DP - imageWidth) {
+//            ILx = (int)(WIDTH_DP - imageWidth);
+//        }
+        moveImage((int)ILy, (int)ILx, 0f, 0f, 0, iv);
+        getImage(al.get(locationIndex).getShortname(),iv);
+        iv.setVisibility(View.VISIBLE);
+
     }
 
     private boolean isInScopeAndRange(AdvancedLocation al) {
@@ -906,7 +917,15 @@ public class ARView extends Activity implements SurfaceHolder.Callback{
     public void calibrate(View view)
     {
         als.calibrate();
+        CharSequence accuracy = Double.toString(als.getAccuracy());
         Toast.makeText(this, "Calibration Complete!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, accuracy, Toast.LENGTH_SHORT).show();
+
+//        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+//        float refreshRating = display.getRefreshRate();
+//        CharSequence show = "" + refreshRating;
+//        Toast.makeText(ARView.this, show, Toast.LENGTH_SHORT).show();
+
     }
 }//end main class
 
